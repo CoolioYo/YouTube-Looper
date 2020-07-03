@@ -1,0 +1,7 @@
+{
+    "manifest_version": 2,
+    "name": "Youtube Looper",
+    "description": "Loops the audio from YouTube videos for a specified amount of time",
+    "version": "1.0.0",
+    "permissions": ["activeTab"]
+}

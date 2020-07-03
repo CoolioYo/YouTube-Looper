@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>YouTube Looper</title>
+        <script src="popup.js"></script>
+    </head>
+    <body>
+        <h1>YouTube Looper</h1>
+        <div id="yt-wrap">
+            <div id="ytplayer"></div>
+        </div>
+        <p>YouTube link:</p>
+        <input type="text" id="video-link" placeholder="YouTube video link">
+        <p>Start time:</p>
+        <input type="text" id="start-time" placeholder="0:00" value="0:00">
+        <p>End time:</p>
+        <input type="text" id="end-time" placeholder="Until the end" value="0:03">
+        <button onclick="loadVideo()">Loop</button>
+    </body>
+</html>
