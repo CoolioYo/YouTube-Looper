@@ -1,6 +1,6 @@
 var videoId;
-var startSeconds;
-var endSeconds;
+var start;
+var end;
 var videoTitle;
 var player;
 var loops;
@@ -32,25 +32,27 @@ document.addEventListener('DOMContentLoaded', function() {
 
         if(checkbox.checked){
             // Loop full video
+            start = 0;
+
             player.loadVideoById({
                 videoId: videoId,
-                startSeconds: 0,
+                startSeconds: start,
                 loop: 1
             });
             console.log("Looping full video")
 
         }else{
             // Loop part of a video
-            startSeconds = document.getElementById("start-time").value;
-            endSeconds = document.getElementById("end-time").value;
+            start = document.getElementById("start-time").value;
+            end = document.getElementById("end-time").value;
 
-            startSeconds = findSeconds(startSeconds);
-            endSeconds = findSeconds(endSeconds);
+            start = findSeconds(start);
+            end = findSeconds(end);
 
             player.loadVideoById({
                 videoId: videoId,
-                startSeconds: startSeconds,
-                endSeconds: endSeconds
+                startSeconds: start,
+                endSeconds: end
             });
         }
     });
@@ -74,8 +76,8 @@ function onYouTubePlayerAPIReady() {
             autoplay: 1, // Auto-play the video on load
             controls: 1, // Show pause/play buttons in player
             autohide: 0, // Hide video controls when playing
-            start: startSeconds,
-            end: endSeconds,
+            startSeconds: start,
+            endSeconds: end,
         },
         events: {
             "onStateChange": onStateChange,
@@ -90,7 +92,7 @@ function onYouTubePlayerAPIReady() {
 
 function onStateChange(state) {
     if (state.data === YT.PlayerState.ENDED) {
-        player.seekTo(startSeconds)
+        player.seekTo(start);
         loops++;
         document.getElementById("loop-counter").innerHTML = "Loops: " + loops;
     }
