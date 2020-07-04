@@ -1,35 +1,38 @@
-const { start } = require("repl");
-
 var videoId;
 var startSeconds;
 var endSeconds;
+var player;
 
-function loadVideo(){
+document.addEventListener('DOMContentLoaded', function() {
+    var button = document.getElementById('loop-button');
 
-    // This code loads the IFrame Player API code asynchronously.
-    var tag = document.createElement('script');
-    tag.src = "https://www.youtube.com/player_api";
-    var firstScriptTag = document.getElementsByTagName('script')[0];
-    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+    button.addEventListener('click', function() {
 
-    var link = document.getElementById("video-link").value;
+        var link = document.getElementById("video-link").value;
 
-    videoId = link.replace("https://www.youtube.com/watch?v=", "");
-    videoId = videoId.split("&")[0];
-    console.log(videoId);
+        // This code loads the IFrame Player API code asynchronously.
+        var tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/player_api";
+        var firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
-    startSeconds = document.getElementById("start-time").value;
-    endSeconds = document.getElementById("end-time").value;
+        videoId = link.replace("https://www.youtube.com/watch?v=", "");
+        videoId = videoId.split("&")[0];
+        console.log(videoId);
 
-    startSeconds = findSeconds(startSeconds);
-    endSeconds = findSeconds(endSeconds);
+        startSeconds = document.getElementById("start-time").value;
+        endSeconds = document.getElementById("end-time").value;
 
-    player.loadVideoById({
-        videoId: videoId,
-        startSeconds: startSeconds,
-        endSeconds: endSeconds
+        startSeconds = findSeconds(startSeconds);
+        endSeconds = findSeconds(endSeconds);
+
+        player.loadVideoById({
+            videoId: videoId,
+            startSeconds: startSeconds,
+            endSeconds: endSeconds
+        });
     });
-}
+});
 
 function findSeconds(time){
     minutes = parseInt(time.split(':')[0] * 60);
@@ -38,21 +41,20 @@ function findSeconds(time){
     return seconds;
 }
 
-var player;
 function onYouTubePlayerAPIReady() {
     player = new YT.Player('ytplayer', {
-        width: "640",
-        height: "360",
+        width: "320",
+        height: "180",
         videoId: videoId,
         playerVars: {
             autoplay: 1, // Auto-play the video on load
-            controls: 0, // Show pause/play buttons in player
+            controls: 1, // Show pause/play buttons in player
             start: startSeconds,
             end: endSeconds,
             autohide: 0, // Hide video controls when playing
         },
         events: {
-            "onStateChange": onStateChange
+            "onStateChange": onStateChange,
         }
     });
 }
