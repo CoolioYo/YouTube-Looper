@@ -1,6 +1,7 @@
 var videoId;
 var startSeconds;
 var endSeconds;
+var videoTitle;
 var player;
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -49,12 +50,18 @@ function onYouTubePlayerAPIReady() {
         playerVars: {
             autoplay: 1, // Auto-play the video on load
             controls: 1, // Show pause/play buttons in player
+            disablekb: 1, // Disable keyboard
+            autohide: 0, // Hide video controls when playing
             start: startSeconds,
             end: endSeconds,
-            autohide: 0, // Hide video controls when playing
         },
         events: {
             "onStateChange": onStateChange,
+            "onReady": function onPlayerReady(event) {
+                videoTitle = event.target.getVideoData().title;
+                document.getElementById("video-title").innerHTML = videoTitle;
+                console.log(videoTitle);
+            }
         }
     });
 }
