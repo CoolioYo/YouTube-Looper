@@ -3,6 +3,7 @@ var startSeconds;
 var endSeconds;
 var videoTitle;
 var player;
+var loops;
 
 document.addEventListener('DOMContentLoaded', function() {
     var button = document.getElementById('loop-button');
@@ -22,6 +23,10 @@ document.addEventListener('DOMContentLoaded', function() {
         videoId = videoId.split("&")[0];
         console.log(videoId);
 
+        // Insert loop counter
+        loops = 0;
+        document.getElementById("loop-counter").innerHTML = "Loops: " + loops;
+
         // Check what portion of video to loop
         var checkbox = document.getElementById('checkbox');
 
@@ -29,6 +34,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // Loop full video
             player.loadVideoById({
                 videoId: videoId,
+                startSeconds: 0,
                 loop: 1
             });
             console.log("Looping full video")
@@ -85,6 +91,8 @@ function onYouTubePlayerAPIReady() {
 function onStateChange(state) {
     if (state.data === YT.PlayerState.ENDED) {
         player.seekTo(startSeconds)
+        loops++;
+        document.getElementById("loop-counter").innerHTML = "Loops: " + loops;
     }
 }
 
