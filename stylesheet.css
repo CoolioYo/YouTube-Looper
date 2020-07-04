@@ -33,6 +33,10 @@ p {
     margin-bottom: 5px;
 }
 
+#checkbox {
+    margin-right: 10px;
+}
+
 #start-time, #end-time{
     width: 60px;
     height: 100%;
