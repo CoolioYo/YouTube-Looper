@@ -69,7 +69,7 @@ function findSeconds(time){
 // Video setup 
 function onYouTubePlayerAPIReady() {
     player = new YT.Player('ytplayer', {
-        width: "320",
+        width: "310",
         height: "180",
         videoId: videoId,
         playerVars: {
