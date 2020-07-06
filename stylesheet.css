@@ -10,13 +10,6 @@
     font-weight: bold;
 }
 
-@media (prefers-color-scheme: light) {
-    body {
-        background-color: white;
-        color: black;
-    }
-}
-
 @media (prefers-color-scheme: dark) {
     body {
         background-color: rgb(41, 42, 45);

@@ -8,6 +8,7 @@ var loops;
 document.addEventListener('DOMContentLoaded', function() {
     var button = document.getElementById('loop-button');
 
+    // Loop button
     button.addEventListener('click', function() {
 
         var link = document.getElementById("video-link").value;
@@ -56,6 +57,25 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
     });
+
+    // Checkbox 
+    var checkbox = document.getElementById('checkbox');
+
+    checkbox.addEventListener('click', function() {
+        if(checkbox.checked){
+            document.getElementById("start-time").value = "start";
+            document.getElementById("end-time").value = "end";
+
+            document.getElementById("start-time").readOnly = true;
+            document.getElementById("end-time").readOnly = true;
+        }else{
+            document.getElementById("start-time").value = "";
+            document.getElementById("end-time").value = "";
+
+            document.getElementById("start-time").readOnly = false;
+            document.getElementById("end-time").readOnly = false;        
+        }
+    });
 });
 
 // Convert time input to seconds
@@ -97,24 +117,3 @@ function onStateChange(state) {
         document.getElementById("loop-counter").innerHTML = "Loops: " + loops;
     }
 }
-
-// Checkbox input
-document.addEventListener('DOMContentLoaded', function() {
-    var checkbox = document.getElementById('checkbox');
-
-    checkbox.addEventListener('click', function() {
-        if(checkbox.checked){
-            document.getElementById("start-time").value = "start";
-            document.getElementById("end-time").value = "end";
-
-            document.getElementById("start-time").readOnly = true;
-            document.getElementById("end-time").readOnly = true;
-        }else{
-            document.getElementById("start-time").value = "";
-            document.getElementById("end-time").value = "";
-
-            document.getElementById("start-time").readOnly = false;
-            document.getElementById("end-time").readOnly = false;        
-        }
-    });
-});
